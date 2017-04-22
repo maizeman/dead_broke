@@ -82,10 +82,7 @@ for year in range(1,101):
                         newstockval = mystock_alloc*stock_gains[target_month]
                         newstockval = newstockval + newstockval*stock_divs[target_month]
 			newbondval = mybond_alloc*bond_gains[target_month]
-#			newbondval = mybond_alloc
-			
-			newbondval2 = newbondval + newbondval*bond_divs[target_month]
-			print newbondval,newbondval2,bond_divs[target_month]
+			newbondval = newbondval + newbondval*bond_divs[target_month]
 			newcashval = mycash_alloc/inflat[target_month]
 #                       print myportfolioval[-1],newstockval,newbondval,newcashval
 			totalnewval = newstockval+newbondval+newcashval - monthly_spend
