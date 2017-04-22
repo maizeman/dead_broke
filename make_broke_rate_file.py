@@ -1,3 +1,5 @@
+import sys
+
 fh = open("shiller_data_formatted2.csv")
 
 def pcttck(x,pos):
@@ -13,6 +15,19 @@ monthly_spend = 4000
 #Make graph comparing trinity and life expectancy style failure rate calculations
 #Requires matplotlib
 make_graph = False
+
+#Percent stocks
+stock_pro = 50
+
+#Percent bonds
+bond_pro = 50
+
+#Any money not in bonds or stocks is assumed to be invested in cash. 
+
+
+if (stock_pro+bond_pro) > 100 or (stock_pro+bond_pro) < 0: 
+	sys.exit("The proportion of your portfolio devoted to stocks plus bonds must be between 0 and 100%")
+
 
 years = []
 trad = []
@@ -56,21 +71,36 @@ for year in range(1,101):
         survived_past_year = 0
         survived_up = 0
         for astart in startmonths:
-                mystockval = [float(start_portfolio)]
+                myportfolioval = [float(start_portfolio)]
                 for ind in range(ymonths):
                         target_month = astart+ind
-                        newstockval = mystockval[-1]*stock_gains[target_month]
+#			print myportfolioval[-1]
+			mystock_alloc = myportfolioval[-1]*(stock_pro/100.0)
+			mybond_alloc = myportfolioval[-1]*(bond_pro/100.0)
+			mycash_alloc = myportfolioval[-1] - mybond_alloc - mystock_alloc
+#			print myportfolioval[-1],mystock_alloc,mybond_alloc,mycash_alloc
+                        newstockval = mystock_alloc*stock_gains[target_month]
                         newstockval = newstockval + newstockval*stock_divs[target_month]
-                        newstockval -= float(monthly_spend)
-                        mystockval.append(newstockval)
+			newbondval = mybond_alloc*bond_gains[target_month]
+#			newbondval = mybond_alloc
+			
+			newbondval2 = newbondval + newbondval*bond_divs[target_month]
+			print newbondval,newbondval2,bond_divs[target_month]
+			newcashval = mycash_alloc/inflat[target_month]
+#                       print myportfolioval[-1],newstockval,newbondval,newcashval
+			totalnewval = newstockval+newbondval+newcashval - monthly_spend
+                        myportfolioval.append(totalnewval)
                         if ind == ymonths - 12:
-                                if newstockval > 0:
+                                if myportfolioval[-1] > 0:
                                         survived_to_year += 1
-                if mystockval[-1] > 0:
+                if myportfolioval[-1] > 0:
                         survived_past_year += 1
-                if mystockval[-1] >= float(start_portfolio):
+                if myportfolioval[-1] >= float(start_portfolio):
                         survived_up += 1
-        fail_rate = (survived_to_year-survived_past_year)/float(survived_to_year)
+	if survived_past_year == 0:
+		print "{0},{1},{2},{3}".format(year,1.0,0.0,survived_to_year)
+		continue
+	fail_rate = (survived_to_year-survived_past_year)/float(survived_to_year)
         up_rate = survived_up/float(survived_past_year)
         cum_rate = cum_rate * (1-fail_rate)
         years.append(year)
