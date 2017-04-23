@@ -8,7 +8,7 @@ By modifying make_broke_rate_file.py one can change withdrawal rates, portfolio 
 python make_broke_rate_file.py > broke_rates.csv
 ```
 
-Then run death and bankrupty graph.py 
+Then run death and bankrupty graph.py. The main variables you can change in this script are age and gender, which are used together to determine risk of death in each year. 
 
 ```
 python death_and_bankruptcy_graph.py
