@@ -16,5 +16,5 @@ python death_and_bankruptcy_graph.py
 
 This will generate the final output which is formatted like this:
 
-![alt tag](https://raw.githubusercontent.com/maizeman/dead_broke/master/Example_Output.png)
+![alt tag](https://raw.githubusercontent.com/maizeman/dead_broke/master/DAB_graphs/Example_Output.png)
 

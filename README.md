@@ -6,7 +6,7 @@ Examples of the output:
 
 A DAB (Death and Bankruptcy) graph.
 
-![alt tag](https://raw.githubusercontent.com/maizeman/dead_broke/master/Example_Output.png)
+![alt tag](https://raw.githubusercontent.com/maizeman/dead_broke/master/DAB_graphs/Example_Output.png)
 
 How the tax code favors or penalizes married couples relative to two single people with equivalent incomes. 
 
