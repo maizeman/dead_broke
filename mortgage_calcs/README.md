@@ -2,14 +2,14 @@
 
 Requires matplotlib
 
-Should require no configuration at all. May need to update the married and single tax brackets, currently hard coded into the script in lines 16-43.
+Should require no configuration at all. 
 
 ```
-python marriage_bonus_pct.py
+python mortgage_vs_stocks
 ```
 
 Example of the output. 
 
 
-![alt tag](https://raw.githubusercontent.com/maizeman/dead_broke/master/marriage_bonus_figure/marriage_bonus_pct_example.png)
+![alt tag](https://github.com/maizeman/dead_broke/blob/master/mortgage_calcs/mortgage_vs_stocks_example.png)
 
