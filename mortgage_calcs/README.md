@@ -5,7 +5,7 @@ Requires matplotlib
 Should require no configuration at all. 
 
 ```
-python mortgage_vs_stocks
+python mortgage_vs_stocks.py
 ```
 
 Example of the output. 
