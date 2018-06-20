@@ -23,14 +23,14 @@ plt.style.use('seaborn-darkgrid')
 PERCENTILE=[5, 15, 25]
 
 fig = plt.figure(figsize=(10,6))
-winners_ax = {}
-winners_ax[PERCENTILE[0]] = fig.add_subplot('221')
-winners_ax[PERCENTILE[2]] = fig.add_subplot('222')
-winners_ax[PERCENTILE[1]] = fig.add_subplot('212')
+portfolio_mix = {}
+portfolio_mix[PERCENTILE[0]] = fig.add_subplot('221')
+portfolio_mix[PERCENTILE[2]] = fig.add_subplot('222')
+portfolio_mix[PERCENTILE[1]] = fig.add_subplot('212')
 pter = FuncFormatter(pcttck)
 for percentile in PERCENTILE:
-    winners_ax[percentile].xaxis.set_major_locator(MultipleLocator(5.))
-    winners_ax[percentile].yaxis.set_major_formatter(pter)
+    portfolio_mix[percentile].xaxis.set_major_locator(MultipleLocator(5.))
+    portfolio_mix[percentile].yaxis.set_major_formatter(pter)
 
 
 startmonths = random.sample(range(0,len(stock_gains)-test_length),num_sims)
@@ -61,14 +61,14 @@ for ind in range(test_length):
     bond_paths[ind] = numpy.array(bond_paths[ind]).reshape(-1, 1)
     cash_paths[ind] = numpy.array(cash_paths[ind]).reshape(-1, 1)
 
-cash_wins={}
-bond_wins={}
-stock_wins={}
+cash_portfolio_mix={}
+bond_portfolio_mix={}
+stock_portfolio_mix={}
 
 for percentile in PERCENTILE:
-    cash_wins[percentile] = [0] + [1.0]*(test_length)
-    bond_wins[percentile] = [0]
-    stock_wins[percentile] = [0]
+    cash_portfolio_mix[percentile] = [0] + [1.0]*(test_length)
+    bond_portfolio_mix[percentile] = [0]
+    stock_portfolio_mix[percentile] = [0]
 
 stock_scenarios=[]
 bond_scenarios=[]
@@ -92,8 +92,8 @@ for ind in range(test_length):
     test_lists = numpy.dot(stock_paths[ind], stock_scenarios) + numpy.dot(bond_paths[ind], bond_scenarios) + numpy.dot(cash_paths[ind], cash_scenarios)
     for percentile in PERCENTILE:
         max_scenario = numpy.argmax(numpy.percentile(test_lists, percentile, axis=0))
-        stock_wins[percentile].append(stock_scenarios[0][max_scenario])
-        bond_wins[percentile].append(bond_scenarios[0][max_scenario]+stock_scenarios[0][max_scenario])
+        stock_portfolio_mix[percentile].append(stock_scenarios[0][max_scenario])
+        bond_portfolio_mix[percentile].append(bond_scenarios[0][max_scenario]+stock_scenarios[0][max_scenario])
 
 xval = numpy.arange(test_length+1)/12.0
 
@@ -102,18 +102,18 @@ for x in xval[:-1]:
         xvals2.append(x)
 xvals2.append(xvals2[-1])
 for percentile in PERCENTILE:
-    cash_wins[percentile].append(0)
-    bond_wins[percentile].append(0)
-    stock_wins[percentile].append(0)
-    c_f = winners_ax[percentile].fill(xvals2,cash_wins[percentile],color='b')
-    b_f = winners_ax[percentile].fill(xvals2,bond_wins[percentile],color='#7e1e9c')
-    s_f = winners_ax[percentile].fill(xvals2,stock_wins[percentile],color='r')
+    cash_portfolio_mix[percentile].append(0)
+    bond_portfolio_mix[percentile].append(0)
+    stock_portfolio_mix[percentile].append(0)
+    c_f = portfolio_mix[percentile].fill(xvals2,cash_portfolio_mix[percentile],color='b')
+    b_f = portfolio_mix[percentile].fill(xvals2,bond_portfolio_mix[percentile],color='#7e1e9c')
+    s_f = portfolio_mix[percentile].fill(xvals2,stock_portfolio_mix[percentile],color='r')
 
-    winners_ax[percentile].set_xlim(0,xvals2[-1])
-    wl = winners_ax[percentile].legend([c_f[0],b_f[0],s_f[0]],['Cash portfolio ratio','Bond portfolio ratio', 'Stock portfolio ratio'],loc=4,frameon=True)
+    portfolio_mix[percentile].set_xlim(0,xvals2[-1])
+    wl = portfolio_mix[percentile].legend([c_f[0],b_f[0],s_f[0]],['Cash portfolio ratio','Bond portfolio ratio', 'Stock portfolio ratio'],loc=4,frameon=True)
 
-    winners_ax[percentile].set_xlabel("Years")
-    winners_ax[percentile].set_ylabel("Portfolio mix")
-    winners_ax[percentile].set_title('Best portfolio mix to maximize the %dth percentile' % (percentile))
+    portfolio_mix[percentile].set_xlabel("Years")
+    portfolio_mix[percentile].set_ylabel("Portfolio mix")
+    portfolio_mix[percentile].set_title('Best portfolio mix to maximize the %dth percentile' % (percentile))
 plt.tight_layout()
 plt.show()

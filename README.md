@@ -15,3 +15,7 @@ How the tax code favors or penalizes married couples relative to two single peop
 Whether bonds, stocks, or cash are likely to provide the best overall returns in different historical time periods.
 
 ![alt tag](https://raw.githubusercontent.com/maizeman/dead_broke/master/stocks_vs_bonds_vs_cash/projections_threeway_example.png)
+
+What portfolio mix of bonds, stocks, or cash provide the best return in different percentiles.
+
+![alt tag](stocks_vs_bonds_vs_cash_portfolio_mix/projections_threeway_example.png)
