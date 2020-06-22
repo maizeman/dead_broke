@@ -10,7 +10,7 @@ num_sims = 500
 stock_gains,stock_divs,bond_gains,bond_divs,inflat = [],[],[],[],[]
 
 for x in fh:
-    y = map(float,x.strip().split(','))
+    y = list(map(float,x.strip().split(',')))
     for alist,aval in zip([stock_gains,stock_divs,bond_gains,bond_divs,inflat],y[1:]):
         alist.append(aval)
 
@@ -87,7 +87,7 @@ bond_scenarios = numpy.array(bond_scenarios).reshape(1, -1)
 cash_scenarios = numpy.array(cash_scenarios).reshape(1, -1)
 
 for ind in range(test_length):
-    print '%d / %d' % (ind+1, test_length)
+    print('%d / %d' % (ind+1, test_length))
     max_value = {percentile: None for percentile in PERCENTILE}
     test_lists = numpy.dot(stock_paths[ind], stock_scenarios) + numpy.dot(bond_paths[ind], bond_scenarios) + numpy.dot(cash_paths[ind], cash_scenarios)
     for percentile in PERCENTILE:

@@ -17,7 +17,7 @@ num_sims = 500
 stock_gains,stock_divs,bond_gains,bond_divs,inflat = [],[],[],[],[]
 
 for x in fh:
-    y = map(float,x.strip().split(','))
+    y = list(map(float,x.strip().split(',')))
     for alist,aval in zip([stock_gains,stock_divs,bond_gains,bond_divs,inflat],y[1:]):
         alist.append(aval)
 
@@ -93,7 +93,7 @@ for astart in startmonths:
     cash_paths.append(mycashval)
 
 cash_wins = [0] + [1.0]*(test_length)
-print len(cash_wins)
+print(len(cash_wins))
 bond_wins = [0]
 stock_wins = [0]
 for ind in monthly_winners:
@@ -110,7 +110,7 @@ stock_lower,stock_median,stock_upper = find_bounds(stock_paths,0.1,0.9)
 bond_lower,bond_median,bond_upper = find_bounds(bond_paths,0.1,0.9)
 
 xval = numpy.arange(test_length+1)/12.0
-print len(xval)
+print(len(xval))
 for s in stock_paths:
     stock_ax.plot(xval,s,color='.5',lw='.3',alpha=.3)
 cont = stock_ax.plot(xval,mycashval,color='b',lw=2)
@@ -130,8 +130,8 @@ xvals2 = [0]
 for x in xval[:-1]:
         xvals2.append(x)
 xvals2.append(xvals2[-1])
-print len(xvals2)
-print len(cash_wins)
+print(len(xvals2))
+print(len(cash_wins))
 c_f = winners_ax.fill(xvals2,cash_wins,color='b')
 b_f = winners_ax.fill(xvals2,bond_wins,color='#7e1e9c')
 s_f = winners_ax.fill(xvals2,stock_wins,color='r')
