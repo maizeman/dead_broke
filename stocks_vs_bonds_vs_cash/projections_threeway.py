@@ -1,14 +1,14 @@
 fh = open("shiller_data_formatted2.csv")
 
 def millions(x, pos):
-	'The two args are the value and tick position'
-	if x >= 1000000:
-		return '$%.1fM' % (x*1e-6)
-	else:
-		return '$%.0fk' % (x*1e-3)
+    'The two args are the value and tick position'
+    if x >= 1000000:
+        return '$%.1fM' % (x*1e-6)
+    else:
+        return '$%.0fk' % (x*1e-3)
 
 def pcttck(x,pos):
-	return "{0}%".format(int((x*100)))
+    return "{0}%".format(int((x*100)))
 
 #length of simulation in months
 test_length = 240

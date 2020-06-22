@@ -1,14 +1,14 @@
 fh = open("my_data.csv")
 
 def millions(x, pos):
-	'The two args are the value and tick position'
-	if x >= 1000000:
-		return '$%.1fM' % (x*1e-6)
-	else:
-		return '$%.0fk' % (x*1e-3)
+    'The two args are the value and tick position'
+    if x >= 1000000:
+        return '$%.1fM' % (x*1e-6)
+    else:
+        return '$%.0fk' % (x*1e-3)
 
 def pcttck(x,pos):
-	return "{0}%".format(int((x*100)))
+    return "{0}%".format(int((x*100)))
 
 #length of simulation in months
 test_length = 360
@@ -24,9 +24,9 @@ for x in fh:
 
 years2 = []
 for y in years:
-	z = str(y).split('.')
-	zb = int(z[0]) + int(z[1])/float(12.0)
-	years2.append(zb)
+    z = str(y).split('.')
+    zb = int(z[0]) + int(z[1])/float(12.0)
+    years2.append(zb)
 
 def find_bounds(list_of_paths,lower_bound,upper_bound):
     median = []
