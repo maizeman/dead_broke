@@ -1,14 +1,14 @@
 fh = open("my_data.csv")
 
 def millions(x, pos):
-	'The two args are the value and tick position'
-	if x >= 1000000:
-		return '$%.1fM' % (x*1e-6)
-	else:
-		return '$%.0fk' % (x*1e-3)
+    'The two args are the value and tick position'
+    if x >= 1000000:
+        return '$%.1fM' % (x*1e-6)
+    else:
+        return '$%.0fk' % (x*1e-3)
 
 def pcttck(x,pos):
-	return "{0}%".format(int((x*100)))
+    return "{0}%".format(int((x*100)))
 
 #length of simulation in months
 test_length = 360
@@ -18,15 +18,15 @@ monthly_income = 2000
 years,stock_gains,stock_divs,bond_gains,bond_divs,inflat = [],[],[],[],[],[]
 
 for x in fh:
-    y = map(float,x.strip().split(','))
+    y = list(map(float,x.strip().split(',')))
     for alist,aval in zip([years,stock_gains,stock_divs,bond_gains,bond_divs,inflat],y[:]):
         alist.append(aval)
 
 years2 = []
 for y in years:
-	z = str(y).split('.')
-	zb = int(z[0]) + int(z[1])/float(12.0)
-	years2.append(zb)
+    z = str(y).split('.')
+    zb = int(z[0]) + int(z[1])/float(12.0)
+    years2.append(zb)
 
 def find_bounds(list_of_paths,lower_bound,upper_bound):
     median = []
@@ -148,8 +148,8 @@ for astart in startmonths:
     stock_end_val_nom.append(networth1)
     mort_end_val_real.append(networth2/cost_rate)
     stock_end_val_real.append(networth1/cost_rate)
-    print ",".join(map(str,[years[astart],mymrate,mypayment,networth1,networth2,networth3,networth4,cost_rate]))
-print stock_wins,mortgage_wins
+    print(",".join(map(str,[years[astart],mymrate,mypayment,networth1,networth2,networth3,networth4,cost_rate])))
+print(stock_wins,mortgage_wins)
 #1/0
 fig = plt.figure(figsize=(10,4))
 results_ax = fig.add_subplot('111')
@@ -165,7 +165,7 @@ a = results_ax.plot(years2[:len(mydiffs)],mort_end_val_nom,'o')
 b = results_ax.plot(years2[:len(mydiffs)],stock_end_val_nom,'o')
 c = results_ax.plot(years2[:len(mydiffs)],mort_end_val_real,'o')
 d = results_ax.plot(years2[:len(mydiffs)],stock_end_val_real,'o')
-print years[:len(mydiffs)]
+print(years[:len(mydiffs)])
 
 results_ax.legend([a[0],b[0],c[0],d[0]],['Final Networth, Mortgage Paydown, Nominal Dollars','Final Networth, Index Funds, Nominal Dollars','Final Networth, Mortgage Paydown, Real Dollars','Final Networth, Index Funds, Real Dollars'],loc=2)
 

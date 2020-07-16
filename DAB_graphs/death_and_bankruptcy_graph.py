@@ -34,7 +34,7 @@ for x in range(fire_age+1,101):
     dead.append(dead[-1]+new_fire_dead+new_broke_dead)
     win.append(fire[-1]*win_dict[x-fire_age])
     xvals.append(x)
-print dead[-1],fire[-1],broke[-1]
+print(dead[-1],fire[-1],broke[-1])
 dfill,bfill,ffill,wfill = [],[],[],[]
 for f,b,d,w in zip(fire,broke,dead,win):
     dfill.append(d)
@@ -76,5 +76,5 @@ ax.set_ylim([0,1000000])
 ax.set_xlim([fire_age,100])
 plt.tight_layout()
 #The risk of your portfolio dying before you do. 
-print tfails/1000000.0
+print(tfails/1000000.0)
 plt.show()

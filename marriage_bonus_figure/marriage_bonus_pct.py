@@ -80,7 +80,7 @@ def cal_tax(income,brackets,pct,married=False):
 import sys
 
 #test = cal_tax(int(sys.argv[1]),married_brackets,tax_pct)
-#print test
+#print(test)
 
 data = []
 for myincome in range(0,310000,1000):
@@ -92,7 +92,7 @@ for myincome in range(0,310000,1000):
         s1_tax = cal_tax(s1_inc,single_brackets,tax_pct)
         s2_tax = cal_tax(s2_inc,single_brackets,tax_pct)
         plist.append(married - s1_tax - s2_tax)
-#    print ",".join(map(str,plist))
+#    print(",".join(map(str,plist)))
     data.append(plist)
 @np.vectorize
 def marriage_bonus_calc(myincome,low_spouse):
@@ -102,10 +102,10 @@ def marriage_bonus_calc(myincome,low_spouse):
     s1_tax = cal_tax(s1_inc,single_brackets,tax_pct)
     s2_tax = cal_tax(s2_inc,single_brackets,tax_pct)
     bonus = married - s1_tax - s2_tax
-#    print bonus
+#    print(bonus)
     return ((bonus*-1)/float(myincome+1))*100.0
 
-print married_brackets
+print(married_brackets)
 
 #print np.array(data)
 
